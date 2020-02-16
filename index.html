@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <header>
-    <button class="btn-cart" type="button">Корзина</button>
+    <nav class="container header">
+        <ul class="menu">
+            <li class="menu__list"><a href="#" class="menu__link">Главная</a></li>
+            <li class="menu__list"><a href="#" class="menu__link menu__link-active">Каталог</a></li>
+            <li class="menu__list"><a href="#" class="menu__link">Контакты</a></li>
+        </ul>
+        <button class="btn-cart" type="button">
+            <img class="cart-img" src="img/cart.svg" alt="Корзина">
+        </button>
+    </nav>
 </header>
 <main>
-    <div class="products"></div>
+    <div class="products container"></div>
 </main>
 <script src="./js/main.js"></script>
 </body>
