@@ -3,26 +3,26 @@ const products = [
     {id: 2, title: 'Mouse', price: 1500},
     {id: 3, title: 'Keyboard', price: 5000},
     {id: 4, title: 'Gamepad', price: 4500},
-    {id: 5},
 ];
 
 //Используем деструктуризацию при передаче параметров в функцию
 //Устанавливаем значения по умолчанию
-const renderProduct = ({title = 'Untitled', price = 0, img = "https://dummyimage.com/80x60/707070/ffffff.png&text=Фото"}) => {
-    return `<div class="product-item">
+//Убираем return и лищние фигурные скобки
+const renderProduct = ({title, price, img = "http://placehold.it/180x200/AAE99C/ecf0f1"}) => `<div class="product-item">
                 <img class="product-img" src="${img}" alt="${title}">
-                <h3>${title}</h3>
-                <p>${price}</p>
-                <button class="by-btn">Добавить в корзину</button>
+                <div class="desc">
+                    <h3>${title}</h3>
+                    <p>${price} \u20bd</p>
+                    <button class="buy-btn">Купить</button>
+                </div>
             </div>`;
-};
+
 
 const renderProducts = (list) => {
-    //Переменная productList в данной функции избыточна и функцию можно переписать одной строкой:
-    //document.querySelector('.products').innerHTML = list.map((item) => renderProduct(item)).join('');
-    //Однако, такое преобразование ухудшит читаемость кода
-    const productList = list.map((item) => renderProduct(item));
-    document.querySelector('.products').innerHTML = productList.join(''); //убираем запятые при помощи метода join()
+    // const productList = list.map((item) => renderProduct(item));
+    // document.querySelector('.products').innerHTML = productList.join(''); //убираем запятые при помощи метода join()
+    // Используем insertAdjacentHTML вместо innerHTML
+    document.querySelector('.products').insertAdjacentHTML('beforeend', list.map((item) => renderProduct(item)).join(''));
 };
 
 renderProducts(products);
