@@ -1,8 +1,8 @@
 class ProductItem {
-    constructor(product, img = "http://placehold.it/180x200/AAE99C/ecf0f1") {
-        this.title = product.title;
-        this.price = product.price;
-        this.id = product.id;
+    constructor({title, price, id}, img = "http://placehold.it/180x200/AAE99C/ecf0f1") {
+        this.title = title;
+        this.price = price;
+        this.id = id;
         this.img = img;
     }
 
@@ -45,6 +45,57 @@ class ProductList {
             block.insertAdjacentHTML('beforeend', productObject.render());
         }
     }
+
+    getSum() {
+        return this.allProducts.reduce((sum, product) => sum + product.price, 0);
+    }
 }
 
-new ProductList();
+productList = new ProductList();
+//Проверка:
+console.log(productList.getSum());
+
+class ProductInCart extends ProductItem{
+    constructor(productItem, quantity = 1){
+        super(productItem, productItem.img);
+        this.quantity = quantity;
+    }
+
+    render(){/*...*/}
+
+    getSum() {
+        return this.price*this.quantity;
+    }
+}
+
+class Cart {
+    constructor() {
+        this.ProductsInCart = [];
+    }
+
+    render(){/*...*/}
+
+    addProduct(addedProduct, quantity){
+        const productObject = new ProductInCart(addedProduct, quantity);
+        this.ProductsInCart.push(productObject);
+    }
+
+    deleteProduct() {/*...*/} //пока не придумала рабочий метод
+
+    clearCart() {
+        this.ProductsInCart = [];
+    }
+
+    getSum() {
+        return this.ProductsInCart.reduce((sum, product) => sum + product.getSum(), 0);
+    }
+}
+
+//Проверка:
+const cart = new Cart();
+cart.addProduct(productList.allProducts[1]);
+cart.addProduct(productList.allProducts[2],5);
+console.log(cart);
+console.log(cart.getSum());
+cart.clearCart();
+console.log(cart);
