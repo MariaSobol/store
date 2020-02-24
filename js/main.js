@@ -52,8 +52,6 @@ class ProductList {
 }
 
 productList = new ProductList();
-//Проверка:
-console.log(productList.getSum());
 
 class ProductInCart extends ProductItem{
     constructor(productItem, quantity = 1){
@@ -90,12 +88,3 @@ class Cart {
         return this.ProductsInCart.reduce((sum, product) => sum + product.getSum(), 0);
     }
 }
-
-//Проверка:
-const cart = new Cart();
-cart.addProduct(productList.allProducts[1]);
-cart.addProduct(productList.allProducts[2],5);
-console.log(cart);
-console.log(cart.getSum());
-cart.clearCart();
-console.log(cart);
