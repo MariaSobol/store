@@ -1,26 +1,29 @@
 const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
-// Переделать в ДЗ
-let getRequest = (url, cb) => {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            if (xhr.status !== 200) {
-                console.log('Error');
-            } else {
-                cb(xhr.responseText);
+// 1. Переделываем с использованием промисов (здесь и в методе _fetchProducts()):
+let getRequest = (url) => {
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status !== 200) {
+                    reject();
+                } else {
+                    resolve(xhr.responseText);
+                }
             }
-        }
-    };
-    xhr.send();
+        };
+        xhr.send();
+    })
 };
 
 class ProductItem {
-    constructor({title, price, id}, img = "http://placehold.it/180x200/AAE99C/ecf0f1") {
-        this.title = title;
+    //3. Исправляем undefined:
+    constructor({id_product, product_name, price, }, img = "http://placehold.it/180x200/AAE99C/ecf0f1") {
+        this.title = product_name;
         this.price = price;
-        this.id = id;
+        this.id = id_product;
         this.img = img;
     }
 
@@ -49,13 +52,16 @@ class ProductList {
             });
     }
 
-    // _fetchProducts() {
-    //   getRequest(`${API}/catalogData.json`, (data) => {
-    //     this.goods = JSON.parse(data);
-    //     this.render();
-    //     console.log(this.goods);
-    //   });
-    // }
+ // 1. Переделываем метод _fetchProducts() с учётом того, что метод getRequest() возвращает промис:
+    _fetchProducts() {
+        getRequest(`${API}/catalogData.json`)
+            .then((data) => {
+                this.goods = JSON.parse(data);
+                this.render();
+            }).catch((error) => {
+                console.log('Error:', error); //TODO Разобраться почему error при ошибке undefined
+            });
+    }
 
     _getProducts() {
         return fetch(`${API}/catalogData.json`)
@@ -107,7 +113,11 @@ class Cart {
         this.ProductsInCart.push(productObject);
     }
 
-    deleteProduct() {/*...*/} //пока не придумала рабочий метод
+    deleteProduct() {/*...*/} //TODO
+
+    getCart(){
+        return this.ProductsInCart;
+    }
 
     clearCart() {
         this.ProductsInCart = [];
