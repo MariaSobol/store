@@ -1,3 +1,21 @@
+const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+
+// Переделать в ДЗ
+let getRequest = (url, cb) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status !== 200) {
+                console.log('Error');
+            } else {
+                cb(xhr.responseText);
+            }
+        }
+    };
+    xhr.send();
+};
+
 class ProductItem {
     constructor({title, price, id}, img = "http://placehold.it/180x200/AAE99C/ecf0f1") {
         this.title = title;
@@ -23,17 +41,28 @@ class ProductList {
         this.container = container;
         this.goods = [];
         this.allProducts = [];
-        this._fetchProducts();
-        this.render();
+        // this._fetchProducts();
+        this._getProducts()
+            .then(data => {
+                this.goods = [...data];
+                this.render();
+            });
     }
 
-    _fetchProducts() {
-        this.goods = [
-            {id: 1, title: 'Notebook', price: 1000},
-            {id: 2, title: 'Mouse', price: 100},
-            {id: 3, title: 'Keyboard', price: 250},
-            {id: 4, title: 'Gamepad', price: 150},
-        ];
+    // _fetchProducts() {
+    //   getRequest(`${API}/catalogData.json`, (data) => {
+    //     this.goods = JSON.parse(data);
+    //     this.render();
+    //     console.log(this.goods);
+    //   });
+    // }
+
+    _getProducts() {
+        return fetch(`${API}/catalogData.json`)
+            .then(result => result.json())
+            .catch(error => {
+                console.log('Error:', error);
+            });
     }
 
     render() {
