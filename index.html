@@ -14,14 +14,23 @@
             <li class="menu__list"><a href="#" class="menu__link menu__link-active">Каталог</a></li>
             <li class="menu__list"><a href="#" class="menu__link">Контакты</a></li>
         </ul>
-        <button class="btn-cart" type="button">
-            <img class="cart-img" src="img/cart.svg" alt="Корзина">
-        </button>
+        <div class="cart">
+            <form action="#" class="search-form">
+                <input type="text" class="search-field">
+                <button class="btn-search" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <button class="btn-cart" type="button">Корзина</button>
+            <div class="cart-block invisible"></div>
+        </div>
     </nav>
 </header>
 <main>
     <div class="products container"></div>
 </main>
+<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
 <script src="./js/main.js"></script>
 </body>
 </html>
