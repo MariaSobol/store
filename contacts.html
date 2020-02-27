@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Контакты</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <nav class="container header">
+        <ul class="menu">
+            <li class="menu__list"><a href="index.html" class="menu__link">Главная</a></li>
+            <li class="menu__list"><a href="index.html" class="menu__link">Каталог</a></li>
+            <li class="menu__list"><a href="#" class="menu__link menu__link-active">Контакты</a></li>
+        </ul>
+        <div class="cart">
+            <button class="btn-cart" type="button">Корзина</button>
+            <div class="cart-block invisible"></div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <h2>Напишите нам</h2>
+    <form action="#" class="feedback-form">
+        Ваше имя: <input class="input-field input-field_name" type="text" placeholder="Ваше имя"><br><br>
+        Телефон: <input class="input-field input-field_tel" type="text" placeholder="+7(000)000-0000"><br><br>
+        Email: <input class="input-field input-field_email" type="text" placeholder="E-mail"><br><br>
+        Текст обращения:<br>
+        <textarea name="user_text" id="" cols="35" rows="5"></textarea> <br><br>
+        <input class="submit-btn" type="submit" value="Отправить"> <input class="reset-btn" type="reset" value="Отмена">
+    </form>
+</div>
+<!--<script src="js/main.js"></script>-->
+<script src="js/regExp.js"></script>
+</body>
+</html>
