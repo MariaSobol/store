@@ -5,7 +5,10 @@ const app = new Vue({
     data: {
         catalogUrl: '/catalogData.json',
         products: [],
-        imgCatalog: 'http://placehold.it/180x200/AAE99C/ecf0f1'
+        filtered: [],
+        cart: [],
+        searchLine: '',
+        imgCatalog: 'http://placehold.it/180x200/AAE99C/ecf0f1',
     },
     methods: {
         getJson(url){
@@ -17,6 +20,11 @@ const app = new Vue({
         },
         addProduct(product){
             console.log(product.id_product);
+        },
+
+        filter(){
+            const regexp = new RegExp(this.searchLine, 'i');
+            this.filtered = this.products.filter(product => regexp.test(product.product_name));
         }
     },
     // хук жизненного цикла
@@ -27,6 +35,7 @@ const app = new Vue({
                     this.products.push(el);
                 }
             });
+        this.filtered = this.products;
     }
 });
 
