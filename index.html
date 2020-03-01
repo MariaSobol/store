@@ -7,29 +7,42 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
-    <nav class="container header">
-        <ul class="menu">
-            <li class="menu__list"><a href="#" class="menu__link">Главная</a></li>
-            <li class="menu__list"><a href="#" class="menu__link menu__link-active">Каталог</a></li>
-            <li class="menu__list"><a href="contacts.html" class="menu__link">Контакты</a></li>
-        </ul>
-        <div class="cart">
-            <form action="#" class="search-form">
-                <input type="text" class="search-field">
-                <button class="btn-search" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-            <button class="btn-cart" type="button">Корзина</button>
-            <div class="cart-block invisible"></div>
+<div id="app">
+    <header>
+        <nav class="container header">
+            <ul class="menu">
+                <li class="menu__list"><a href="#" class="menu__link">Главная</a></li>
+                <li class="menu__list"><a href="#" class="menu__link menu__link-active">Каталог</a></li>
+                <li class="menu__list"><a href="contacts.html" class="menu__link">Контакты</a></li>
+            </ul>
+            <div class="cart">
+                <form action="#" class="search-form">
+                    <input type="text" class="search-field">
+                    <button class="btn-search" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <button class="btn-cart" type="button">Корзина</button>
+                <div class="cart-block invisible"></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="products container">
+            <div class="product-item" v-for="product of products" :key="product.id_product">
+                <img :src="imgCatalog" alt="Some img">
+                <div class="desc">
+                    <h3>{{product.product_name}}</h3>
+                    <p>{{product.price}}₽</p>
+                    <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                </div>
+            </div>
         </div>
-    </nav>
-</header>
-<main>
-    <div class="products container"></div>
-</main>
+    </main>
+</div>
 <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="js/main.js"></script>
 </body>
+
 </html>
