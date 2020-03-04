@@ -44,6 +44,7 @@
     </header>
     <main>
         <div class="products container">
+            <div class="no-data" v-if="!cart.length">Нет данных</div>
             <div class="product-item" v-for="product of filtered" :key="product.id_product">
                 <img :src="imgCatalog" alt="Some img">
                 <div class="desc">

@@ -33,7 +33,6 @@ const app = new Vue({
                             //TODO: проверить, дописать
                             product.quantity = 1;
                             this.cart.push(product);// = [product]; //TODO: работает неправильно?
-                            console.log("не найден");
                         }
                     } else {
                         alert('Error');
