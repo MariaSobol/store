@@ -89,6 +89,7 @@ p {
 
 .cart {
   position: relative;
+  display: flex;
 }
 
 .cart-block {
