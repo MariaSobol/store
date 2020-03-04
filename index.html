@@ -16,14 +16,15 @@
                 <li class="menu__list"><a href="contacts.html" class="menu__link">Контакты</a></li>
             </ul>
             <div class="cart">
-                <form action="#" class="search-form">
+                <form action="#" class="search-form" @submit.prevent="filter">
                     <input type="text" class="search-field" v-model="searchLine">
-                    <button @click="filter" class="btn-search" type="submit">
+                    <button class="btn-search" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
                 <button class="btn-cart" type="button" @click="isVisibleCart=!isVisibleCart">Корзина</button>
                 <div class="cart-block" v-show="isVisibleCart">
+                    <p v-if="!cart.length">Корзина пуста</p>
                     <div class="cart-item" v-for="product of cart" :key="product.id_product">
                         <div class="product-bio">
                             <img :src="imgCart" alt="Some img">
@@ -44,7 +45,7 @@
     </header>
     <main>
         <div class="products container">
-            <div class="no-data" v-if="!cart.length">Нет данных</div>
+            <div class="no-data" v-if="!products.length">Нет данных</div>
             <div class="product-item" v-for="product of filtered" :key="product.id_product">
                 <img :src="imgCatalog" alt="Some img">
                 <div class="desc">

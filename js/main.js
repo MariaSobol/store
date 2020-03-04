@@ -30,9 +30,8 @@ const app = new Vue({
                         if(find){
                             find.quantity++;
                         } else {
-                            //TODO: проверить, дописать
-                            product.quantity = 1;
-                            this.cart.push(product);// = [product]; //TODO: работает неправильно?
+                            let prod = Object.assign({quantity: 1}, product);
+                            this.cart.push(prod);
                         }
                     } else {
                         alert('Error');
@@ -44,11 +43,10 @@ const app = new Vue({
             this.getJson(`${API}/deleteFromBasket.json`)
                 .then(data => {
                     if(data.result === 1){
-                        let find = this.cart.find(el => el.id_product === product.id_product);
-                        if(find.quantity > 1){ // если товара > 1, то уменьшаем количество на 1
-                            find.quantity--;
+                        if(product.quantity > 1){ // если товара > 1, то уменьшаем количество на 1
+                            product.quantity--;
                         } else { // удаляем
-                            this.cart.splice(this.cart.indexOf(find), 1);
+                            this.cart.splice(this.cart.indexOf(product), 1);
                         }
                     } else {
                         alert('Error');
@@ -68,9 +66,9 @@ const app = new Vue({
             .then(data => {
                 for(let el of data){
                     this.products.push(el);
+                    this.filtered.push(el);
                 }
             });
-        this.filtered = this.products;
         this.getJson(`${API + this.cartUrl}`)
             .then(data => {
                 for(let el of data.contents){
