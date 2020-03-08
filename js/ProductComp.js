@@ -8,10 +8,10 @@ Vue.component('products', {
         }
     },
     methods: {
-        filter(){
-            const regexp = new RegExp(this.searchLine, 'i');
+        filter(searchLine){
+            let regexp = new RegExp(searchLine, 'i');
             this.filtered = this.products.filter(product => regexp.test(product.product_name));
-        }
+        },
     },
     mounted(){
         this.$parent.getJson(`${API + this.catalogUrl}`)
