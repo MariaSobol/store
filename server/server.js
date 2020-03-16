@@ -21,3 +21,8 @@ const port = process.env.PORT || 8888;
 app.listen(port, () => {
     console.log(`Listening ${port} port`);
 });
+
+// app.get(); // READ
+// app.post(); // CREATE
+// app.put(); // UPDATE
+// app.delete(); // DELETE
